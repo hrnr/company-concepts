@@ -1,7 +1,9 @@
 package cz.hrnr.company_concepts;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
@@ -27,8 +29,8 @@ public class ConsoleApplication {
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter helpFormatter = new HelpFormatter();
 		String credentialsPath = null;
-		List<String> files;
-		Credentials credentials;
+		List<String> files = null;
+		Credentials credentials = null;
 		try {
 			CommandLine cmd = parser.parse(options, args);
 			// this option is required
@@ -44,7 +46,7 @@ public class ConsoleApplication {
 		}
 		try {
 			credentials = CredentialsUtils.parseJSON(new File(credentialsPath).toPath());
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.err.println("invalid credentials file");
 			System.exit(3);
 		}
