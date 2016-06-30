@@ -14,8 +14,11 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import cz.hrnr.company_concepts.annotator.CompanyConceptsAnalyzer;
+import cz.hrnr.company_concepts.annotator.JSONAnnotator;
 import cz.hrnr.company_concepts.watson.Credentials;
 import cz.hrnr.company_concepts.watson.CredentialsUtils;
+import cz.hrnr.company_concepts.watson.WatsonCompanyConceptsAnalyzer;
 
 public class ConsoleApplication {
 
@@ -49,6 +52,25 @@ public class ConsoleApplication {
 		} catch (IOException e) {
 			System.err.println("invalid credentials file");
 			System.exit(3);
+		}
+
+		// read input and write analyzed output
+		FileReader reader = null;
+		FileWriter writer = null;
+		try {
+			reader = new FileReader(files.get(0));
+			writer = new FileWriter(files.get(1));
+		} catch (IOException e) {
+			System.err.println("invalid input/output file");
+			System.exit(3);
+		}
+		CompanyConceptsAnalyzer analyzer = new WatsonCompanyConceptsAnalyzer(credentials);
+		JSONAnnotator annotator = new JSONAnnotator(analyzer);
+		try {
+			annotator.annotateCompanies(reader, writer);
+		} catch (IOException e) {
+			System.err.println("could not write output");
+			System.exit(1);
 		}
 	}
 
