@@ -1,7 +1,20 @@
-apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+	mavenCentral()
+}
 
 dependencies {
     // IBM watson toolkit library
     compile 'com.ibm.watson.developer_cloud:java-sdk:3.0.1'
+    compile 'commons-cli:commons-cli:1.3.1'
 }
 
+mainClassName = 'cz.hrnr.company_concepts.ConsoleApplication'
+
+run {
+    def execArgs = System.getProperty('exec.args')
+	if(execArgs != null) {
+		args execArgs.split()
+	}
+}
