@@ -18,7 +18,8 @@ public class WatsonCompanyConceptsAnalyzerTest {
 
 	@Test
 	public void testAnalyzeCompanyConcepts() throws IOException {
-		Credentials credentials = CredentialsUtils.parseJSON(new File("credentials.json").toPath());
+		Credentials credentials = CredentialsUtils
+				.parseJSON(new File(System.getProperty("watson.credentials")).toPath());
 
 		Company company = new Company();
 		company.setName("Google");

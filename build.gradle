@@ -21,6 +21,8 @@ run {
 }
 
 test {
+	// pass credentials property
+	systemProperty "watson.credentials", System.getProperty("watson.credentials")
 	testLogging {
 		showStandardStreams = true
 	}

@@ -23,7 +23,8 @@ public class JSONAnnotatorTest {
 
 	@Test
 	public void testAnnotateCompanies() throws IOException {
-		Credentials credentials = CredentialsUtils.parseJSON(new File("credentials.json").toPath());
+		Credentials credentials = CredentialsUtils
+				.parseJSON(new File(System.getProperty("watson.credentials")).toPath());
 		Reader reader = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("input.json"));
 
 		OutputStream outputStream = new ByteArrayOutputStream();
