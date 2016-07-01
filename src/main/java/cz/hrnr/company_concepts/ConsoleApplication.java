@@ -55,21 +55,12 @@ public class ConsoleApplication {
 		}
 
 		// read input and write analyzed output
-		FileReader reader = null;
-		FileWriter writer = null;
-		try {
-			reader = new FileReader(files.get(0));
-			writer = new FileWriter(files.get(1));
-		} catch (IOException e) {
-			System.err.println("invalid input/output file");
-			System.exit(3);
-		}
-		CompanyConceptsAnalyzer analyzer = new WatsonCompanyConceptsAnalyzer(credentials);
-		JSONAnnotator annotator = new JSONAnnotator(analyzer);
-		try {
+		try (FileReader reader = new FileReader(files.get(0)); FileWriter writer = new FileWriter(files.get(1))) {
+			CompanyConceptsAnalyzer analyzer = new WatsonCompanyConceptsAnalyzer(credentials);
+			JSONAnnotator annotator = new JSONAnnotator(analyzer);
 			annotator.annotateCompanies(reader, writer);
 		} catch (IOException e) {
-			System.err.println("could not write output");
+			System.err.println(e.getMessage());
 			System.exit(1);
 		}
 	}
