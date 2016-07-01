@@ -13,7 +13,6 @@ import com.google.gson.stream.JsonWriter;
 
 /**
  * Annotates JSON data of companies with keywords describing their business
- *
  */
 public class JSONAnnotator {
 	private CompanyConceptsAnalyzer analyzer;

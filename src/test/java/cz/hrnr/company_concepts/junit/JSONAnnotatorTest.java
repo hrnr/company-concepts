@@ -22,7 +22,7 @@ import cz.hrnr.company_concepts.watson.WatsonCompanyConceptsAnalyzer;
 public class JSONAnnotatorTest {
 
 	@Test
-	public void test() throws IOException {
+	public void testAnnotateCompanies() throws IOException {
 		Credentials credentials = CredentialsUtils.parseJSON(new File("credentials.json").toPath());
 		Reader reader = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("input.json"));
 

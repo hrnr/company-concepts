@@ -21,8 +21,6 @@ import cz.hrnr.company_concepts.annotator.CompanyConceptsAnalyzer;
  * Uses IBM watson REST api to get the most relevant concepts (keywords) for
  * company. Curently uses solely company's webpage (url) to extract keywords.
  *
- * @author henry
- *
  */
 public class WatsonCompanyConceptsAnalyzer implements CompanyConceptsAnalyzer {
 	AlchemyLanguage service;
