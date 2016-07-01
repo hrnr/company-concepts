@@ -29,10 +29,10 @@ public class JSONAnnotator {
 		}.getType();
 		// read from json a retrieve relevant keywords for each company
 		List<Company> companies = parser.fromJson(reader, companyListType);
-		for (Company company : companies) {
+		companies.parallelStream().forEach(company -> {
 			List<String> keywords = analyzer.analyzeCompanyConcepts(company);
 			company.setKeywords(keywords);
-		}
+		});
 
 		// write out annotated companies with keywords
 		try (JsonWriter jsonWriter = parser.newJsonWriter(writer)) {
